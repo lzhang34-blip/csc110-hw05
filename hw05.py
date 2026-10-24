@@ -1,24 +1,61 @@
 """
-Name: (put your name here)
-Peers: (add any collaborators)
-References: (anything you checked to solve this)
+Name: Linda Zhang
+Peers: Worked independently
+References: Lecture 14, Google search to understand assertion errors
 """
 
 def get_letter():
-    """ Add your own Docstring """
+    """ This function needs no input parameters but it returns a single character A, B, or C """
     # remove the default return and add your code
-    return ""
+    while True:
+        letter = input("Give an single uppercase letter: ")
+        if len(letter) != 1:
+            print("Error: it needs to be a single character.")
+            continue
+        if letter not in ["A", "B", "C"]:
+            print("Error: You provided the wrong character.")
+            continue
+        return letter
+    ""
+# Use continue keyword to restart the loop
+# != means "doesn't equal"
 
 def get_digit():
-    """ Add your own Docstring """
+    """ This function needs no input parameters but it returns a single digit character in the range [1,3] """
     # remove the default return and add your code
-    return 0
-
+    while True:
+        digit = input("Give an single number character: ")
+        if not digit.isdigit():
+            print("Error: your input should be only digits.")
+            continue
+            
+        if digit not in ["1", "2", "3"]:
+            print("Error: a single digit needs to be in [1,3].")
+            continue
+            
+        return digit
+    0
+# Use "isdigit()" to check if a string character is a digit
 
 def check_pattern(letter, digit, lst):
-    """ Add your own Docstring """
+    """ This function checks if any of the words inside st_list contain the letter character and digit character (in that order) """
     # remove the default pass and add your code
-    pass
+    print("Strings with the pattern:")
+    printed_words = set()
+
+    for word in lst:
+        idx_letter = word.find(letter)
+        if idx_letter != -1:
+            idx_digit = word.find(digit, idx_letter + 1)
+            if idx_digit != -1 and word not in printed_words:
+                print(word, end=" ")
+                printed_words.add(word)
+
+    print()
+    
+# Unlike a list, a set has no guaranteed order
+# word.find(letter) locates the position of the first occurrence of a letter character
+# word.find(digit, idx_letter + 1) searches for the digit character, ignoring any characters at or before word.find(letter)
 
 
 #  The function main is INCOMPLETE, you must finish it
@@ -42,7 +79,14 @@ def main ():
     # ADD YOUR CODE UNDER THIS LINE
     # -------------------------------------------------
 
-    # Your code Here
+    while True:
+        letter = get_letter()
+        digit = get_digit()
+        check_pattern(letter, digit, st_list)
+        user_choice = input("Try Again? (y/n): ")
+        if user_choice != 'y':
+            break
+ # Ends if user_choice is 'n'       
 
     # -------------------------------------------------
     # No need to modify anything Below this line
